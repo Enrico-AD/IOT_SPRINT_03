@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp32-mottu",
+      "top": -50,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn-portal",
+      "top": -150,
+      "left": -120,
+      "attrs": { "color": "green", "label": "Portal (Entrada/Saída)" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn-manutencao",
+      "top": -150,
+      "left": 120,
+      "attrs": { "color": "red", "label": "Manutenção" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led-patio",
+      "top": 50,
+      "left": 0,
+      "attrs": { "color": "yellow" }
+    }
+  ],
+  "connections": [
+    [ "btn-portal:1.l", "esp32-mottu:21" ],
+    [ "btn-portal:2.r", "esp32-mottu:GND" ],
+    [ "btn-manutencao:1.l", "esp32-mottu:19" ],
+    [ "btn-manutencao:2.r", "esp32-mottu:GND" ],
+    [ "led-patio:C", "esp32-mottu:GND" ],
+    [ "led-patio:A", "esp32-mottu:5" ]
+  ],
+  "dependencies": {},
+  "serialMonitor": {
+    "display": "auto",
+    "newline": "lf"
+  }
+}
