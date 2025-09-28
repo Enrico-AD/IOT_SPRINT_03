@@ -57,12 +57,68 @@ O projeto simula um **ecossistema de mobilidade conectado**, onde motos são mon
 
 ---
 
-## 🛠️ Como executar
+🛠️ Como executar o nosso projeto
+✅ Simulação no Wokwi
 
-### 🐍 Simuladores Python
-```bash
-cd simulators
-pip install -r requirements.txt
-python dock_sensor_sim.py
-python portal_rfid_sim.py
-python manutencao_sim.py
+Acesse Wokwi
+.
+
+Importe os arquivos do repositório:
+
+sketch.ino e diagram.json → para o publicador (portal/dock/manutenção)
+
+receptor.ino e diagram-receptor.json → para o receptor (status da moto)
+
+Clique em Start Simulation.
+
+Use os botões virtuais no diagrama:
+
+Botão verde → alterna entrada/saída no portal.
+
+Botão vermelho → alterna manutenção/pronta.
+
+O LED amarelo → acende quando a moto está no pátio, apaga quando está fora.
+
+Veja no Serial Monitor os eventos MQTT publicados e recebidos em tempo real.
+
+🌐 Execução no Node-RED
+
+Permite visualizar e processar os eventos das motos em dashboards interativos.
+
+Instale o Node-RED:
+
+npm install -g node-red
+node-red
+
+
+Acesse http://localhost:1880
+ no navegador.
+
+Importe o fluxo pronto (flows-mottu.json) que acompanha o repositório.
+
+Configure os nós MQTT in com:
+
+Broker: broker.hivemq.com
+
+Porta: 1883
+
+QoS: 0
+
+Tópicos:
+
+mottu/portal
+
+mottu/dock
+
+mottu/manutencao
+
+Clique em Deploy.
+
+Abra o dashboard em http://localhost:1880/ui
+ para visualizar:
+
+Evento Portal: entrada / saída
+
+Status Dock: ocupada / livre
+
+Status Manutenção: manutenção / pronta
