@@ -1,0 +1,168 @@
+[
+  {
+    "id": "tab_mottu",
+    "type": "tab",
+    "label": "Fluxo Motos",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "mqtt_in_portal",
+    "type": "mqtt in",
+    "z": "tab_mottu",
+    "name": "Portal",
+    "topic": "mottu/portal",
+    "qos": "0",
+    "datatype": "auto",
+    "broker": "mqtt_broker_hivemq",
+    "x": 300,
+    "y": 160,
+    "wires": [
+      ["text_portal","debug_portal"]
+    ]
+  },
+  {
+    "id": "mqtt_in_dock",
+    "type": "mqtt in",
+    "z": "tab_mottu",
+    "name": "Dock",
+    "topic": "mottu/dock",
+    "qos": "0",
+    "datatype": "auto",
+    "broker": "mqtt_broker_hivemq",
+    "x": 300,
+    "y": 220,
+    "wires": [
+      ["text_dock","debug_dock"]
+    ]
+  },
+  {
+    "id": "mqtt_in_manutencao",
+    "type": "mqtt in",
+    "z": "tab_mottu",
+    "name": "Manutenção",
+    "topic": "mottu/manutencao",
+    "qos": "0",
+    "datatype": "auto",
+    "broker": "mqtt_broker_hivemq",
+    "x": 310,
+    "y": 280,
+    "wires": [
+      ["text_manutencao","debug_manutencao"]
+    ]
+  },
+  {
+    "id": "text_portal",
+    "type": "ui_text",
+    "z": "tab_mottu",
+    "group": "dashboard_group",
+    "order": 1,
+    "width": 6,
+    "height": 1,
+    "name": "Portal",
+    "label": "Evento Portal:",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 600,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "text_dock",
+    "type": "ui_text",
+    "z": "tab_mottu",
+    "group": "dashboard_group",
+    "order": 2,
+    "width": 6,
+    "height": 1,
+    "name": "Dock",
+    "label": "Status Dock:",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 600,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "text_manutencao",
+    "type": "ui_text",
+    "z": "tab_mottu",
+    "group": "dashboard_group",
+    "order": 3,
+    "width": 6,
+    "height": 1,
+    "name": "Manutenção",
+    "label": "Status Manutenção:",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 610,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "debug_portal",
+    "type": "debug",
+    "z": "tab_mottu",
+    "name": "Debug Portal",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "x": 800,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "debug_dock",
+    "type": "debug",
+    "z": "tab_mottu",
+    "name": "Debug Dock",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "x": 800,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "debug_manutencao",
+    "type": "debug",
+    "z": "tab_mottu",
+    "name": "Debug Manutenção",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "x": 820,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "mqtt_broker_hivemq",
+    "type": "mqtt-broker",
+    "name": "HiveMQ Public Broker",
+    "broker": "broker.hivemq.com",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": false,
+    "keepalive": "60",
+    "cleansession": true
+  },
+  {
+    "id": "dashboard_group",
+    "type": "ui_group",
+    "name": "Mottu Dashboard",
+    "tab": "dashboard_tab",
+    "order": 1,
+    "disp": true,
+    "width": 12,
+    "collapse": false
+  },
+  {
+    "id": "dashboard_tab",
+    "type": "ui_tab",
+    "name": "Monitoramento Motos",
+    "icon": "dashboard",
+    "order": 1
+  }
+]
