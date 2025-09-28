@@ -4,8 +4,7 @@
     "type": "tab",
     "label": "Fluxo Motos",
     "disabled": false,
-    "info": "",
-    "env": []
+    "info": ""
   },
   {
     "id": "mqtt_in_portal",
@@ -16,11 +15,9 @@
     "qos": "0",
     "datatype": "auto",
     "broker": "mqtt_broker_hivemq",
-    "x": 300,
-    "y": 160,
-    "wires": [
-      ["text_portal","debug_portal"]
-    ]
+    "x": 200,
+    "y": 100,
+    "wires": [["text_portal","debug_portal"]]
   },
   {
     "id": "mqtt_in_dock",
@@ -31,11 +28,9 @@
     "qos": "0",
     "datatype": "auto",
     "broker": "mqtt_broker_hivemq",
-    "x": 300,
-    "y": 220,
-    "wires": [
-      ["text_dock","debug_dock"]
-    ]
+    "x": 200,
+    "y": 160,
+    "wires": [["text_dock","debug_dock"]]
   },
   {
     "id": "mqtt_in_manutencao",
@@ -46,11 +41,9 @@
     "qos": "0",
     "datatype": "auto",
     "broker": "mqtt_broker_hivemq",
-    "x": 310,
-    "y": 280,
-    "wires": [
-      ["text_manutencao","debug_manutencao"]
-    ]
+    "x": 210,
+    "y": 220,
+    "wires": [["text_manutencao","debug_manutencao"]]
   },
   {
     "id": "text_portal",
@@ -64,8 +57,8 @@
     "label": "Evento Portal:",
     "format": "{{msg.payload}}",
     "layout": "row-spread",
-    "x": 600,
-    "y": 160,
+    "x": 500,
+    "y": 100,
     "wires": []
   },
   {
@@ -80,8 +73,8 @@
     "label": "Status Dock:",
     "format": "{{msg.payload}}",
     "layout": "row-spread",
-    "x": 600,
-    "y": 220,
+    "x": 500,
+    "y": 160,
     "wires": []
   },
   {
@@ -96,8 +89,8 @@
     "label": "Status Manutenção:",
     "format": "{{msg.payload}}",
     "layout": "row-spread",
-    "x": 610,
-    "y": 280,
+    "x": 510,
+    "y": 220,
     "wires": []
   },
   {
@@ -108,8 +101,8 @@
     "active": true,
     "tosidebar": true,
     "console": false,
-    "x": 800,
-    "y": 160,
+    "x": 720,
+    "y": 100,
     "wires": []
   },
   {
@@ -120,8 +113,8 @@
     "active": true,
     "tosidebar": true,
     "console": false,
-    "x": 800,
-    "y": 220,
+    "x": 720,
+    "y": 160,
     "wires": []
   },
   {
@@ -132,8 +125,8 @@
     "active": true,
     "tosidebar": true,
     "console": false,
-    "x": 820,
-    "y": 280,
+    "x": 730,
+    "y": 220,
     "wires": []
   },
   {
