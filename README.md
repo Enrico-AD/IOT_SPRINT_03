@@ -57,44 +57,33 @@ O projeto simula um **ecossistema de mobilidade conectado**, onde motos são mon
 
 ---
 
-🛠️ Como executar o nosso projeto
-✅ Simulação no Wokwi
+## 🛠️ Como executar
 
-Acesse Wokwi
-.
+### ✅ Simulação no Wokwi
+1. Acesse [Wokwi](https://wokwi.com).  
+2. Importe os arquivos do repositório:  
+   - `sketch.ino` e `diagram.json` → para o **publicador (portal/dock/manutenção)**  
+   - `receptor.ino` e `diagram-receptor.json` → para o **receptor (status da moto)**  
+3. Clique em **Start Simulation**.  
+4. Use os **botões virtuais** no diagrama:  
+   - Botão verde → alterna entrada/saída no portal.  
+   - Botão vermelho → alterna manutenção/pronta.  
+   - LED amarelo → acende quando a moto está no pátio, apaga quando está fora.  
+5. Veja no **Serial Monitor** os eventos MQTT publicados e recebidos em tempo real.
 
-Importe os arquivos do repositório:
+---
 
-sketch.ino e diagram.json → para o publicador (portal/dock/manutenção)
-
-receptor.ino e diagram-receptor.json → para o receptor (status da moto)
-
-Clique em Start Simulation.
-
-Use os botões virtuais no diagrama:
-
-Botão verde → alterna entrada/saída no portal.
-
-Botão vermelho → alterna manutenção/pronta.
-
-O LED amarelo → acende quando a moto está no pátio, apaga quando está fora.
-
-Veja no Serial Monitor os eventos MQTT publicados e recebidos em tempo real.
-
-🌐 Execução no Node-RED
-
+### 🌐 Execução no Node-RED
 Permite visualizar e processar os eventos das motos em dashboards interativos.
 
-Instale o Node-RED:
-
-npm install -g node-red
-node-red
-
-
+1. Instale o Node-RED:  
+   ```bash
+   npm install -g node-red
+   node-red
 Acesse http://localhost:1880
  no navegador.
 
-Importe o fluxo pronto (flows-mottu.json) que acompanha o repositório.
+Importe o fluxo pronto flows-mottu.json que acompanha o repositório.
 
 Configure os nós MQTT in com:
 
@@ -114,7 +103,7 @@ mottu/manutencao
 
 Clique em Deploy.
 
-Abra o dashboard em http://localhost:1880/ui
+Acesse o dashboard em http://localhost:1880/ui
  para visualizar:
 
 Evento Portal: entrada / saída
@@ -122,3 +111,73 @@ Evento Portal: entrada / saída
 Status Dock: ocupada / livre
 
 Status Manutenção: manutenção / pronta
+
+
+---
+
+👉 Agora o **README** já está completo, com a parte do **Node-RED** que você pediu formatada em Markdown.  
+
+Quer que eu adicione também uma seção final **📺 Entregáveis** (link do GitHub, vídeo no YouTube e .zip da entrega), igual os professores normalmente exigem na Sprint?
+
+Você disse:
+não ta indo 
+O ChatGPT disse:
+
+Boa! 👀 Eu vi pelo print que o Markdown não renderizou corretamente no seu README — o problema está na identação e no uso das crases (```).
+
+No GitHub, para funcionar bem, a seção tem que estar assim:
+
+### 🌐 Execução no Node-RED
+Permite visualizar e processar os eventos das motos em dashboards interativos.
+
+1. Instale o Node-RED:
+   ```bash
+   npm install -g node-red
+   node-red
+
+
+Acesse http://localhost:1880
+ no navegador.
+
+Importe o fluxo pronto flows-mottu.json que acompanha o repositório.
+
+Configure os nós MQTT in com:
+
+Broker: broker.hivemq.com
+
+Porta: 1883
+
+QoS: 0
+
+Tópicos:
+
+mottu/portal
+
+mottu/dock
+
+mottu/manutencao
+
+Clique em Deploy.
+
+Acesse o dashboard em http://localhost:1880/ui
+ para visualizar:
+
+Evento Portal: entrada / saída
+
+Status Dock: ocupada / livre
+
+Status Manutenção: manutenção / pronta
+
+
+---
+
+📌 **Erros que estavam no seu README:**
+- O bloco ```bash não estava indentado → o GitHub quebrou o estilo.  
+- Alguns itens estavam fora da lista numerada → isso fez perder a hierarquia.  
+- As URLs precisam estar entre `[]()` para virar link clicável.  
+
+---
+
+👉 Faz o seguinte: substitui a seção de **Execução no Node-RED** do seu README pelo bloco que te mandei acima.  
+
+Quer que eu já te entregue o **README.md completo com a correção aplicada** (copiando tudo do zero, já 100% pronto para colar no GitHub)?
