@@ -1,47 +1,41 @@
 {
   "version": 1,
+  "author": "Carolina Estevam Rodgerio",
   "editor": "wokwi",
   "parts": [
-    { 
-      "type": "wokwi-esp32-devkit-v1", 
-      "id": "esp32-mottu", 
-      "top": -40, 
-      "left": -10, 
-      "attrs": {} 
-    },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 48, "left": 148.84, "attrs": {} },
     {
-      "type": "wokwi-pushbutton",
-      "id": "btn-portal",
-      "top": -150,
-      "left": -120,
-      "attrs": { "color": "green", "label": "Portal (Entrada/Saída)" }
-    },
-    {
-      "type": "wokwi-pushbutton",
-      "id": "btn-manutencao",
-      "top": -150,
-      "left": 120,
-      "attrs": { "color": "red", "label": "Manutenção" }
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": -94.5,
+      "left": -148.1,
+      "attrs": { "distance": "400" }
     },
     {
       "type": "wokwi-led",
-      "id": "led-patio",
-      "top": 50,
-      "left": 0,
-      "attrs": { "color": "yellow" }
+      "id": "led1",
+      "top": 34.8,
+      "left": 301.4,
+      "attrs": { "color": "red", "flip": "1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 263.15,
+      "left": 249.6,
+      "attrs": { "value": "220" }
     }
   ],
   "connections": [
-    [ "btn-portal:1.l", "esp32-mottu:21" ],
-    [ "btn-portal:2.r", "esp32-mottu:GND" ],
-    [ "btn-manutencao:1.l", "esp32-mottu:19" ],
-    [ "btn-manutencao:2.r", "esp32-mottu:GND" ],
-    [ "led-patio:C", "esp32-mottu:GND" ],
-    [ "led-patio:A", "esp32-mottu:5" ]
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ultrasonic1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "ultrasonic1:GND", "esp:GND.2", "black", [ "v0", "h306", "v76.8" ] ],
+    [ "ultrasonic1:TRIG", "esp:5", "blue", [ "v0" ] ],
+    [ "ultrasonic1:ECHO", "esp:18", "blue", [ "v0" ] ],
+    [ "led1:C", "r1:2", "white", [ "v0" ] ],
+    [ "led1:A", "esp:D0", "white", [ "v0" ] ],
+    [ "esp:GND.1", "r1:1", "black", [ "h-19.05", "v76.8" ] ]
   ],
-  "dependencies": {},
-  "serialMonitor": {
-    "display": "auto",
-    "newline": "lf"
-  }
+  "dependencies": {}
 }
