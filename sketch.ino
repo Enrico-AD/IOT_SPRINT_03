@@ -45,11 +45,11 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nWiFi conectado!");
+  Serial.println("\n✅ WiFi conectado!");
 
   client.setServer(mqttServer, mqttPort);
 
-  Serial.println("Dispositivo MOTTU iniciado!");
+  Serial.println("🚀 Dispositivo PUBLISHER iniciado!");
 }
 
 // ========================
@@ -59,11 +59,11 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Conectando ao broker MQTT...");
     if (client.connect("MottuPublisher")) {
-      Serial.println("Conectado!");
+      Serial.println(" conectado!");
     } else {
-      Serial.print("Falha, rc=");
+      Serial.print(" falhou, rc=");
       Serial.print(client.state());
-      Serial.println(" Tentando novamente em 5s");
+      Serial.println(" tentando novamente em 5s");
       delay(5000);
     }
   }
