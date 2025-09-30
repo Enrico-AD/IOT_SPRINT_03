@@ -1,25 +1,30 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
-// Configurações de rede WiFi
+// ========================
+// Configurações WiFi
+// ========================
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 
-// Configurações do broker MQTT
+// ========================
+// Configurações MQTT
+// ========================
 const char* mqttServer = "broker.hivemq.com";
 const int mqttPort = 1883;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-// Variáveis de status da moto
+// ========================
+// Estado da moto
+// ========================
 String motoId = "moto-001";
 String statusMoto = "fora_patio";  
-// Status possíveis: fora_patio, no_patio, em_manutencao, pronta
 
-// ============================
+// ========================
 // Setup inicial
-// ============================
+// ========================
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, password);
@@ -29,87 +34,67 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nWiFi conectado!");
+  Serial.println("\n✅ WiFi conectado!");
 
   client.setServer(mqttServer, mqttPort);
   client.setCallback(callback);
 
-  Serial.println("Dispositivo RECEPTOR de motos iniciado!");
+  Serial.println("📡 Dispositivo SUBSCRIBER iniciado!");
 }
 
-// ============================
+// ========================
 // Reconexão ao broker MQTT
-// ============================
+// ========================
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Conectando ao broker MQTT...");
-    if (client.connect("ReceptorMottu")) {
-      Serial.println("Conectado!");
-      // Tópicos que o receptor escuta
+    if (client.connect("MottuSubscriber")) {
+      Serial.println(" conectado!");
+      // Inscrever nos tópicos
       client.subscribe("mottu/portal");
       client.subscribe("mottu/dock");
       client.subscribe("mottu/manutencao");
     } else {
-      Serial.print("Falha, rc=");
+      Serial.print(" falhou, rc=");
       Serial.print(client.state());
-      Serial.println(" Tentando novamente em 5 segundos");
+      Serial.println(" tentando em 5s");
       delay(5000);
     }
   }
 }
 
-// ============================
-// Callback para mensagens MQTT
-// ============================
+// ========================
+// Callback para mensagens
+// ========================
 void callback(char* topic, byte* payload, unsigned int length) {
   String msg;
   for (unsigned int i = 0; i < length; i++) {
     msg += (char)payload[i];
   }
 
-  Serial.print("Mensagem recebida no tópico [");
+  Serial.print("📩 [");
   Serial.print(topic);
-  Serial.print("]: ");
+  Serial.print("] ");
   Serial.println(msg);
 
-  // Atualiza status com base no tópico
   if (strcmp(topic, "mottu/portal") == 0) {
-    if (msg == "entrada") {
-      statusMoto = "no_patio";
-      Serial.println("🚪 Moto entrou no pátio.");
-    } else if (msg == "saida") {
-      statusMoto = "fora_patio";
-      Serial.println("🚪 Moto saiu do pátio.");
-    }
-
+    statusMoto = (msg == "entrada") ? "no_patio" : "fora_patio";
   } else if (strcmp(topic, "mottu/dock") == 0) {
-    if (msg == "ocupada") {
-      Serial.println("📍 Moto estacionada em uma vaga.");
-    } else if (msg == "livre") {
-      Serial.println("📍 Moto retirada da vaga.");
-    }
-
+    // apenas exibe
   } else if (strcmp(topic, "mottu/manutencao") == 0) {
-    if (msg == "manutencao") {
-      statusMoto = "em_manutencao";
-      Serial.println("🔧 Moto em manutenção.");
-    } else if (msg == "pronta") {
-      statusMoto = "pronta";
-      Serial.println("✅ Moto pronta para uso.");
-    }
+    statusMoto = (msg == "manutencao") ? "em_manutencao" : "pronta";
   }
 
-  // Exibe status atual
   Serial.print("📊 Status atual da ");
   Serial.print(motoId);
   Serial.print(": ");
   Serial.println(statusMoto);
-  Serial.println("---------------------------------------");
+  Serial.println("---------------------------------");
 }
 
-// ============================
+// ========================
 // Loop principal
-// ============================
+// ========================
 void loop() {
   if (!client.connected()) {
     reconnect();
