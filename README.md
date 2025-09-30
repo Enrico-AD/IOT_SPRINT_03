@@ -3,6 +3,9 @@
 Protótipo funcional de IoT desenvolvido para a 3ª Sprint da disciplina **Disruptive Architectures: IoT, IoB & Generative IA**.  
 O sistema integra **simuladores IoT de motos**, **backend FastAPI** e **dashboard Streamlit**, com comunicação em tempo real via **MQTT** e persistência em banco de dados.
 
+
+<img width="490" height="355" alt="image" src="https://github.com/user-attachments/assets/1192b87a-d817-4b67-b74e-dff8d43e7840" />
+
 ---
 
 ## 📖 Descrição
