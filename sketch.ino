@@ -58,7 +58,7 @@ void setup() {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Conectando ao broker MQTT...");
-    if (client.connect("MottuPublisher")) {
+    if (client.connect("MotthruPublisher")) {
       Serial.println(" conectado!");
     } else {
       Serial.print(" falhou, rc=");
@@ -96,11 +96,11 @@ void loop() {
   if (digitalRead(BTN_PORTAL) == LOW) {
     if (statusMoto == "fora_patio") {
       statusMoto = "no_patio";
-      publishStatus("mottu/portal", "entrada");
+      publishStatus("motthru/portal", "entrada");
       digitalWrite(LED_PATIO, HIGH);
     } else {
       statusMoto = "fora_patio";
-      publishStatus("mottu/portal", "saida");
+      publishStatus("motthru/portal", "saida");
       digitalWrite(LED_PATIO, LOW);
     }
     delay(500); // debounce
@@ -110,10 +110,10 @@ void loop() {
   if (digitalRead(BTN_MANUTENCAO) == LOW) {
     if (statusMoto != "em_manutencao") {
       statusMoto = "em_manutencao";
-      publishStatus("mottu/manutencao", "manutencao");
+      publishStatus("motthru/manutencao", "manutencao");
     } else {
       statusMoto = "pronta";
-      publishStatus("mottu/manutencao", "pronta");
+      publishStatus("motthru/manutencao", "pronta");
     }
     delay(500); // debounce
   }
