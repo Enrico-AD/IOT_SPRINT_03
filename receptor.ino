@@ -48,12 +48,12 @@ void setup() {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Conectando ao broker MQTT...");
-    if (client.connect("MottuSubscriber")) {
+    if (client.connect("MotthruSubscriber")) {
       Serial.println(" conectado!");
       // Inscrever nos tópicos
-      client.subscribe("mottu/portal");
-      client.subscribe("mottu/dock");
-      client.subscribe("mottu/manutencao");
+      client.subscribe("motthru/portal");
+      client.subscribe("motthru/dock");
+      client.subscribe("motthru/manutencao");
     } else {
       Serial.print(" falhou, rc=");
       Serial.print(client.state());
@@ -77,11 +77,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("] ");
   Serial.println(msg);
 
-  if (strcmp(topic, "mottu/portal") == 0) {
+  if (strcmp(topic, "motthru/portal") == 0) {
     statusMoto = (msg == "entrada") ? "no_patio" : "fora_patio";
-  } else if (strcmp(topic, "mottu/dock") == 0) {
+  } else if (strcmp(topic, "motthru/dock") == 0) {
     // apenas exibe
-  } else if (strcmp(topic, "mottu/manutencao") == 0) {
+  } else if (strcmp(topic, "motthru/manutencao") == 0) {
     statusMoto = (msg == "manutencao") ? "em_manutencao" : "pronta";
   }
 
